@@ -2,11 +2,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 public class checkMouse : MonoBehaviour,IPointerClickHandler
 {
-    //Переключение рычагов
-    void revers(GameObject go)
+   
+    public static void revers(GameObject go)
     {
         if (go.tag == "0")
         {
@@ -22,39 +22,48 @@ public class checkMouse : MonoBehaviour,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         GameObject button = this.gameObject;
-        /*
-        if (button.GetComponent<SpriteRenderer>().sprite.name == "2")
-            button.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/1");
-        else
-            button.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/2");
-        */
-
         string[] strKoord = button.name.Split(' ');
         int x = Convert.ToInt32(strKoord[0]);
         int y = Convert.ToInt32(strKoord[1]);
-
         for (int j = 0; j < Manager.matrixSize; j++)
             revers(Manager.matrixGame[x, j]);
         for (int i = 0; i < Manager.matrixSize; i++)
             revers(Manager.matrixGame[i, y]);
         revers(Manager.matrixGame[x, y]);
 
-
-        //Manager.matrixGame[1,1].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/1"); ;
+        if (CheckWin())
+        {
+            Debug.Log("У НАС ПОБЕДИТЕЛЬ");
+            Manager.matrixSize++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            
+        }
+      
+       
 
     }
 
-
-
-
-
-
-
-   
-
-    // Update is called once per frame
-    void Update()
+    // Проверка победы
+    public static bool CheckWin()
     {
-        
+        int up = 0;
+        int down = 0;
+        for (int i = 0; i < Manager.matrixSize; i++)
+            for (int j = 0; j < Manager.matrixSize; j++)
+            {
+                if (Manager.matrixGame[i, j].tag == "0")
+                    down++;
+                else up++;
+            }
+        if (down == Manager.matrixSize * Manager.matrixSize || up == Manager.matrixSize * Manager.matrixSize)
+            return true;
+        return false;
     }
+
+
+
+
+
+
+
 }
