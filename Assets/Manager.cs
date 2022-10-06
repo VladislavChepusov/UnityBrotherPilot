@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 public class Manager : MonoBehaviour
 {
     [SerializeField]
-    public static int matrixSize =2;
+    public static int matrixSize =10;
     [SerializeField]
     private float titlesize = 0;
     public static GameObject[,] matrixGame;
@@ -16,19 +18,40 @@ public class Manager : MonoBehaviour
         matrixGame = new GameObject[matrixSize, matrixSize];
         Generate();
     }
- 
+
+    void Update()
+    {
+        if (Input.GetKey("escape")) // если нажат Esc
+        {
+            //Time.timeScale = 0;
+            SceneManager.LoadScene(0);
+            
+        
+        }
+    }
+
     private void Generate()
     {
         Camera.main.orthographicSize = matrixSize;
         Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(0, Camera.main.pixelHeight));
+
+        Camera cam = Camera.main;
+        //float height = 2f * cam.orthographicSize;
+        //float width = height * cam.aspect;
+        Vector2 pos1 = new Vector2(cam.orthographicSize, 0);
+
         GameObject referens = (GameObject)Instantiate(Resources.Load("2"));
+
+
         for (int row = 0; row < matrixSize; row++)
         {
             for (int col = 0; col < matrixSize; col++)
             {
                 GameObject title = (GameObject)Instantiate(referens, transform);
                 title.name = $"{row} {col}";
-                title.transform.position = pos + new Vector2(col * titlesize + titlesize/2f, row * -titlesize - titlesize/2f);
+                 title.transform.position = pos + pos1 +  new Vector2(col * titlesize + titlesize/2f, row * -titlesize - titlesize/2f) ;
+                
+
                 title.tag = "0";
                 matrixGame[row, col] = title;
             }    

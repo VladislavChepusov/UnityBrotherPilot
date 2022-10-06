@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a8ef76154b8aa4498b047f3a55bf60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matrixSize: 4
   titlesize: 2
 --- !u!4 &215752772
 Transform:
@@ -209,7 +208,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: secondCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
