@@ -9,8 +9,8 @@ public class StartGame : MonoBehaviour
     // Start is called before the first frame update
     public void _Starting()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("SampleScene");
+        //Time.timeScale = 1;
+        SceneManager.LoadScene(1);
 
     }
     public void _Exit()
