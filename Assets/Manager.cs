@@ -8,8 +8,7 @@ public class Manager : MonoBehaviour
 {
     //[SerializeField]
     public static int matrixSize = 2;
-    [SerializeField]
-    private float titlesize = 0;
+    private float titlesize = 2;
     public static GameObject[,] matrixGame;
 
 
@@ -33,9 +32,9 @@ public class Manager : MonoBehaviour
         Camera cam = Camera.main;
         Vector2 pos1 = new Vector2(cam.orthographicSize, 0);
 
-        GameObject referens = (GameObject)Instantiate(Resources.Load("2"));
+        //GameObject referens = (GameObject)Instantiate(Resources.Load("2"));
 
-
+        GameObject referens = (GameObject)Instantiate(Resources.Load("prefabPanel"));
         for (int row = 0; row < matrixSize; row++)
         {
             for (int col = 0; col < matrixSize; col++)
@@ -44,7 +43,6 @@ public class Manager : MonoBehaviour
                 title.name = $"{row} {col}";
                 title.transform.position = pos + pos1 +  new Vector2(col * titlesize + titlesize/2f, row * -titlesize - titlesize/2f) ;
                 //title.transform.position = new Vector2(col * titlesize , row * -titlesize );
-
 
                 title.tag = "0";
                 matrixGame[row, col] = title;

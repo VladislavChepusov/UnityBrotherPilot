@@ -5,19 +5,25 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 public class checkMouse : MonoBehaviour,IPointerClickHandler
 {
-   
+
     public static void revers(GameObject go)
     {
+        var animator = go.GetComponent<Animator>();
+        //var animator = go.GetComponent<Animator>();
+        //var xm = new checkMouse();
         if (go.tag == "0")
         {
             go.tag = "1";
-            go.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/1");
+            // go.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/two");
+            animator.SetBool("left", false);
         }
         else
         {
             go.tag = "0";
-            go.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/2");
+            //go.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/one");
+            animator.SetBool("left", true);
         }
+      
     }
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -38,9 +44,6 @@ public class checkMouse : MonoBehaviour,IPointerClickHandler
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             
         }
-      
-       
-
     }
 
     // Проверка победы
@@ -59,11 +62,4 @@ public class checkMouse : MonoBehaviour,IPointerClickHandler
             return true;
         return false;
     }
-
-
-
-
-
-
-
 }
